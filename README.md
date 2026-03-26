@@ -19,3 +19,8 @@ After years of rule-breaking, derailment, and "creative" solutions, the Dungeon 
 * **Metagame Eavesdropping:** The DM can hear the players' proximity voice chat.
 * **Appearance:** The players can constantly see the game master looking over them as they play inside of his game. 
 
+
+---
+### ** Ideas **
+- Players having fantasy themed cosmetics for when theyre in the dungeon and IRL nerd wear for when theyre the DM
+- unlockable bonuses and buffs like in DBD
