@@ -17,14 +17,5 @@ After years of rule-breaking, derailment, and "creative" solutions, the Dungeon 
     * **The Healer:** Manage health bars and sanity while frantically screaming at everyone to stay in the healing circle.
     * **The Damage:** A "Min-Maxer" glass cannon who can delete bosses but constantly walks into spike traps while reading item flavor text.
 * **Metagame Eavesdropping:** The DM can hear the players' proximity voice chat.
-* **Rule Disputes:** Trigger high-speed "button-mash" arguments over the game manual. If the players win, they might get loot, if the DM wins, he gets to win some more salt points, which unlock more tiles, tools, monsters, and cosmetics.
 * **Appearance:** The players can constantly see the game master looking over them as they play inside of his game. 
 
----
-
-### **Technical Overview (GitHub)**
-
-* **Engine:** Godot
-* **Networking:** Integrated proximity-based VoIP with a "DM Listener" hook.
-* **State Management:** Real-time synchronization between the top-down RTS interface and the first-person action clients.
-* **Procedural Spite:** A dynamic navmesh system that allows the DM to move walls and floors without breaking AI pathing.
