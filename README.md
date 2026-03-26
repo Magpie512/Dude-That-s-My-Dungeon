@@ -21,6 +21,6 @@ After years of rule-breaking, derailment, and "creative" solutions, the Dungeon 
 
 
 ---
-### ** Ideas **
+### **Ideas**
 - Players having fantasy themed cosmetics for when theyre in the dungeon and IRL nerd wear for when theyre the DM
 - unlockable bonuses and buffs like in DBD
