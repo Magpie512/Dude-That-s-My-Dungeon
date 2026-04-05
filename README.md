@@ -13,9 +13,7 @@ After years of rule-breaking, derailment, and "creative" solutions, the Dungeon 
 * **Asymmetric Perspectives:** While the Dungeon Master enjoys a tactical "God View" of the entire map, the players are trapped in a claustrophobic first-person perspective.
 * **Live Dungeon Editing:** As the DM, spend points to live-edit the map. Swap a treasure chest for a Mimic, drop a boulder on the Party's Tank, or physically slide a hallway ten feet to the left to separate the party.
 * **The Dork Trinity:**
-    * **The Tank:** Body-block summons and "well, actually" the dungeon's physics to ignore trap damage.
-    * **The Healer:** Manage health bars and sanity while frantically screaming at everyone to stay in the healing circle.
-    * **The Damage:** A "Min-Maxer" glass cannon who can delete bosses but constantly walks into spike traps while reading item flavor text.
+    * customizable Fantasy characters encompassing the healer tank and dps archetypes.
 * **Metagame Eavesdropping:** The DM can hear the players' proximity voice chat.
 * **Appearance:** The players can constantly see the game master looking over them as they play inside of his game. 
 
