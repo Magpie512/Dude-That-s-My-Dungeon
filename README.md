@@ -15,7 +15,8 @@ After years of rule-breaking, derailment, and "creative" solutions, the Dungeon 
 * **The Dork Trinity:**
     * customizable Fantasy characters encompassing the healer tank and dps archetypes.
 * **Metagame Eavesdropping:** The DM can hear the players' proximity voice chat.
-* **Appearance:** The players can constantly see the game master looking over them as they play inside of his game. 
+* **Appearance:** The players can constantly see the game master looking over them as they play inside of his game.
+* **Possesion:** The DM may posses an object or an enemy.
 
 ---
 ### **Ideas**
