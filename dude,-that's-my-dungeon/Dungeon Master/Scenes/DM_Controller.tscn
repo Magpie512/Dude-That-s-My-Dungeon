@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://cxhodm5kj8ep7"]
-
-[ext_resource type="Script" uid="uid://b8q00bp6llbpq" path="res://Dungeon Master/Scripts/dm_controller.gd" id="1_86hsd"]
-
-[node name="Node3D" type="Node3D" unique_id=1266917381]
-script = ExtResource("1_86hsd")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1522164870]
-transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 0, 0)
