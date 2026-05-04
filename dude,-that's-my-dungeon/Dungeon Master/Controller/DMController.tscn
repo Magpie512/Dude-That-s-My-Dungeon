@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ix1db3macgbb"]
+
+[ext_resource type="Script" uid="uid://b1cgjj5pavsko" path="res://Dungeon Master/Controller/DMController.gd" id="1_r8wro"]
+[ext_resource type="PackedScene" uid="uid://cxhcx27b3ey3r" path="res://User Interface/Player/PlayerMenu.tscn" id="2_viw30"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0qq03"]
+
+[node name="DM Head" type="Node3D" unique_id=1844525406]
+script = ExtResource("1_r8wro")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1613707729]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=2041240387]
+mesh = SubResource("SphereMesh_0qq03")
+
+[node name="PlayerMenu" parent="." unique_id=997250887 instance=ExtResource("2_viw30")]
