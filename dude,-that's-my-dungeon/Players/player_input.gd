@@ -1,63 +1,52 @@
 extends CharacterBody3D
 
-@export_group("Movement")
-@export var walk_speed: float = 5.0
-@export var run_speed: float = 8.0
-@export var acceleration: float = 10.0
-@export var friction: float = 12.0
-@export var rotation_speed: float = 12.0
+@export var SPEED = 5.0
+@export var JUMP_VELOCITY = 4.5
+@export var MOUSE_SENSITIVITY = 0.002
 
-@export_group("Physics")
-@export var jump_velocity: float = 4.5
-@export var gravity_multiplier: float = 1.0
+# Get the gravity from the project settings
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@onready var visuals = $Visuals # The node containing your mesh
+# Reference to the 'Head' node to rotate it up/down
+@onready var head = $Head
 
-func _physics_process(delta: float) -> void:
-	# 1. Handle Gravity
-	if not is_on_floor():
-		velocity += get_gravity() * gravity_multiplier * delta
+func _ready():
+	# Captures the mouse so it doesn't leave the game window
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	# 2. Handle Jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
-
-	# 3. Get Input Direction
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	# Align movement with the camera orientation
-	var camera = get_viewport().get_camera_3d()
-	var direction = Vector3.ZERO
-	
-	if camera:
-		var forward = camera.global_basis.z
-		var right = camera.global_basis.x
-		forward.y = 0 # Keep movement horizontal
-		right.y = 0
-		direction = (forward * input_dir.y + right * input_dir.x).normalized()
-
-	# 4. Movement Logic (Acceleration & Friction)
-	var target_speed = run_speed if Input.is_action_pressed("shift") else walk_speed
-	var target_velocity = direction * target_speed
-
-	if direction.length() > 0:
-		# Accelerate
-		velocity.x = lerp(velocity.x, target_velocity.x, acceleration * delta)
-		velocity.z = lerp(velocity.z, target_velocity.z, acceleration * delta)
+func _unhandled_input(event):
+	# Check if the mouse is moving
+	if event is InputEventMouseMotion:
+		# Rotate the whole player body left/right (Yaw)
+		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		
-		# Smooth Rotation: Turn the visuals to face movement direction
-		var target_rotation = atan2(-direction.x, -direction.z)
-		visuals.rotation.y = lerp_angle(visuals.rotation.y, target_rotation, rotation_speed * delta)
+		# Rotate only the head up/down (Pitch)
+		head.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
+		
+		# Clamp the vertical rotation so you can't flip upside down
+		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+
+func _physics_process(delta):
+	
+	# Handle Gravity
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+
+	# Handle Jump
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get movement direction using your Input Map from image_d19afb.png
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	
+	# transform.basis ensures movement is relative to where you are looking
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
 	else:
-		# Apply Friction to stop
-		velocity.x = lerp(velocity.x, 0.0, friction * delta)
-		velocity.z = lerp(velocity.z, 0.0, friction * delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-	
-	# 5. Animation Hook (Basic Example)
-	# update_animations(direction.length())
-
-func update_animations(moving: float):
-	# If using an AnimationTree, set your blend positions here
-	# $AnimationTree.set("parameters/movement/blend_position", moving)
-	pass
