@@ -26,17 +26,33 @@ func _process(delta: float):
 	handle_zoom(delta)
 
 func handle_movement(delta: float):
+	# Get horizontal input (WASD / Joysticks)
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var direction = (camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	# Create a base direction vector
+	var move_vec = Vector3(input_dir.x, 0, input_dir.y)
+	
+	# Add vertical movement while the "jump" action is held
+	if Input.is_action_pressed("jump"):
+		move_vec.y += 1.0
+	
+	# Optional: Add downward movement if you have a "crouch" action
+	if Input.is_action_pressed("crouch"):
+		move_vec.y -= 1.0
+	
+	# Transform the direction based on where the camera is looking
+	var direction = (camera.global_transform.basis * move_vec).normalized()
 	
 	if direction:
 		_velocity = _velocity.lerp(direction * move_speed, acceleration * delta)
 	else:
+		# Smoothly stop when no keys are pressed
 		_velocity = _velocity.lerp(Vector3.ZERO, acceleration * delta)
 	
 	global_position += _velocity * delta
 
 func _input(event):
+	# Mouse look logic
 	if event is InputEventMouseMotion:
 		_yaw -= event.relative.x * look_sensitivity
 		_pitch -= event.relative.y * look_sensitivity
@@ -44,6 +60,7 @@ func _input(event):
 		rotation_degrees.y = _yaw
 		camera.rotation_degrees.x = _pitch
 
+	# FOV Zoom logic
 	if event.is_action_pressed("scroll_up"):
 		_target_fov = clamp(_target_fov - zoom_speed, min_fov, max_fov)
 	if event.is_action_pressed("scroll_down"):
