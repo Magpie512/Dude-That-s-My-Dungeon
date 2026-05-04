@@ -35,4 +35,5 @@ offset_bottom = 356.0
 focus_mode = 1
 text = "Player"
 
+[connection signal="pressed" from="Control/GM" to="Control" method="_on_gm_pressed"]
 [connection signal="pressed" from="Control/Play" to="Control" method="_on_play_pressed"]

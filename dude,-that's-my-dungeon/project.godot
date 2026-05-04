@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/image="uid://bcmvdq3l7hh0d"
 config/icon="uid://bcmvdq3l7hh0d"
 
+[autoload]
+
+GameState="*uid://su7ij1d0ajyg"
+
 [display]
 
 window/stretch/mode="viewport"

@@ -5,7 +5,7 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_0qq03"]
 
-[node name="DM Head" type="Node3D" unique_id=1844525406]
+[node name="DMHead" type="Node3D" unique_id=1844525406]
 script = ExtResource("1_r8wro")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1613707729]

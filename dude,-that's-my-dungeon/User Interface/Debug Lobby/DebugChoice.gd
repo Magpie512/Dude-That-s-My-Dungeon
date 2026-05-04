@@ -1,10 +1,9 @@
 extends Control
 
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://Environment/Level.tscn")
+	GameState.selected_role = GameState.Role.PLAYER
+	get_tree().change_scene_to_file("res://Environment/Playmat.tscn")
 
 func _on_GM_pressed():
-	get_tree().change_scene_to_file("res://Environment/Level.tscn")
-
-func _on_gm_pressed():
-	pass
+	GameState.selected_role = GameState.Role.DM
+	get_tree().change_scene_to_file("res://Environment/Playmat.tscn")
