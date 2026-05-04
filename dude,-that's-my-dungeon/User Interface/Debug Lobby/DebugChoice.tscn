@@ -17,22 +17,36 @@ offset_right = 1156.0
 offset_bottom = 661.0
 color = Color(0.36439458, 0.28483468, 0.5478898, 1)
 
+[node name="Label" type="Label" parent="Control" unique_id=2143214527]
+layout_mode = 0
+offset_left = 508.0
+offset_top = 56.0
+offset_right = 641.0
+offset_bottom = 431.0
+theme_override_font_sizes/font_size = 37
+text = "Control
+
+
+    OR"
+
 [node name="GM" type="Button" parent="Control" unique_id=50913052]
 layout_mode = 0
-offset_left = 113.0
-offset_top = 242.0
-offset_right = 263.0
-offset_bottom = 342.0
+offset_left = 411.0
+offset_top = 271.0
+offset_right = 744.0
+offset_bottom = 348.0
 focus_mode = 1
+theme_override_font_sizes/font_size = 50
 text = "Game Master"
 
 [node name="Play" type="Button" parent="Control" unique_id=1047879698]
 layout_mode = 0
-offset_left = 853.0
-offset_top = 256.0
-offset_right = 1003.0
-offset_bottom = 356.0
+offset_left = 498.0
+offset_top = 124.0
+offset_right = 657.0
+offset_bottom = 201.0
 focus_mode = 1
+theme_override_font_sizes/font_size = 50
 text = "Player"
 
 [connection signal="pressed" from="Control/GM" to="Control" method="_on_gm_pressed"]

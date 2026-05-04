@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://upefhhdomegy"]
+
+[sub_resource type="GDScript" id="GDScript_weus1"]
+script/source = "extends CanvasLayer
+
+# Actions to expose in the remapper. Add/remove entries to match your project.godot input map.
+const REMAPPABLE_ACTIONS: Array[String] = [
+	\"move_forward\",
+	\"move_backward\",
+	\"move_left\",
+	\"move_right\",
+	\"jump\",
+	\"crouch\",
+]
+
+const SAVE_PATH = \"user://keybinds.cfg\"
+
+# Friendly display names for each action
+const ACTION_LABELS: Dictionary = {
+	\"move_forward\":  \"Move Forward\",
+	\"move_backward\": \"Move Backward\",
+	\"move_left\":     \"Move Left\",
+	\"move_right\":    \"Move Right\",
+	\"jump\":          \"Jump\",
+	\"crouch\":        \"Crouch\",
+}
+
+var _listening_action: String = \"\"   # which action is waiting for a key
+var _listening_button: Button = null # the button currently flashing
+
+@onready var rows_container: VBoxContainer = $Control/Panel/MarginContainer/VBoxContainer/Rows
+@onready var status_label: Label = $Control/Panel/MarginContainer/VBoxContainer/StatusLabel
+
+func _ready():
+	hide()
+	_load_binds()
+	_build_rows()
+
+# ── Public API ──────────────────────────────────────────────────────────────
+
+func open():
+	show()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func close():
+	_cancel_listen()
+	hide()
+	# Caller is responsible for restoring mouse mode
+
+# ── Row builder ─────────────────────────────────────────────────────────────
+
+func _build_rows():
+	# Clear old rows (in case of rebuild)
+	for child in rows_container.get_children():
+		child.queue_free()
+
+	for action in REMAPPABLE_ACTIONS:
+		var row = HBoxContainer.new()
+		row.add_theme_constant_override(\"separation\", 16)
+
+		var label = Label.new()
+		label.text = ACTION_LABELS.get(action, action)
+		label.custom_minimum_size = Vector2(180, 0)
+		row.add_child(label)
+
+		var btn = Button.new()
+		btn.custom_minimum_size = Vector2(160, 0)
+		btn.text = _get_key_label(action)
+		btn.pressed.connect(_on_bind_button_pressed.bind(action, btn))
+		row.add_child(btn)
+
+		var reset_btn = Button.new()
+		reset_btn.text = \"Reset\"
+		reset_btn.pressed.connect(_on_reset_pressed.bind(action, btn))
+		row.add_child(reset_btn)
+
+		rows_container.add_child(row)
+
+# ── Listening logic ──────────────────────────────────────────────────────────
+
+func _on_bind_button_pressed(action: String, btn: Button):
+	if _listening_action != \"\":
+		_cancel_listen()
+		return
+	_listening_action = action
+	_listening_button = btn
+	btn.text = \"Press a key…\"
+	status_label.text = \"Press any key to bind  [Escape = cancel]\"
+
+func _input(event):
+	if not visible or _listening_action == \"\":
+		return
+
+	if not (event is InputEventKey):
+		return
+	if not event.pressed or event.is_echo():
+		return
+
+	get_viewport().set_input_as_handled()
+
+	if event.keycode == KEY_ESCAPE:
+		_cancel_listen()
+		return
+
+	# Remap: clear existing keyboard events for this action, add new one
+	var clean_event = InputEventKey.new()
+	clean_event.physical_keycode = event.physical_keycode
+	clean_event.keycode = event.keycode
+
+	# Remove old keyboard bindings for this action only
+	for old in InputMap.action_get_events(_listening_action):
+		if old is InputEventKey:
+			InputMap.action_erase_event(_listening_action, old)
+
+	InputMap.action_add_event(_listening_action, clean_event)
+
+	_listening_button.text = _get_key_label(_listening_action)
+	status_label.text = \"\"
+	_listening_action = \"\"
+	_listening_button = null
+
+	_save_binds()
+
+func _cancel_listen():
+	if _listening_button:
+		_listening_button.text = _get_key_label(_listening_action)
+	_listening_action = \"\"
+	_listening_button = null
+	status_label.text = \"\"
+
+func _on_reset_pressed(action: String, btn: Button):
+	if _listening_action != \"\":
+		_cancel_listen()
+	InputMap.action_erase_events(action)
+	InputMap.load_from_project_settings()  # restores project defaults for ALL actions
+	# Re-read just this action's label
+	btn.text = _get_key_label(action)
+	_save_binds()
+
+# ── Helpers ──────────────────────────────────────────────────────────────────
+
+func _get_key_label(action: String) -> String:
+	if not InputMap.has_action(action):
+		return \"(none)\"
+	for event in InputMap.action_get_events(action):
+		if event is InputEventKey:
+			return event.as_text_physical_keycode()
+	return \"(none)\"
+
+# ── Persistence ──────────────────────────────────────────────────────────────
+
+func _save_binds():
+	var cfg = ConfigFile.new()
+	for action in REMAPPABLE_ACTIONS:
+		var keys: Array[int] = []
+		for event in InputMap.action_get_events(action):
+			if event is InputEventKey:
+				keys.append(event.physical_keycode)
+		cfg.set_value(\"binds\", action, keys)
+	cfg.save(SAVE_PATH)
+
+func _load_binds():
+	var cfg = ConfigFile.new()
+	if cfg.load(SAVE_PATH) != OK:
+		return  # No save file yet — use project defaults
+
+	for action in REMAPPABLE_ACTIONS:
+		if not cfg.has_section_key(\"binds\", action):
+			continue
+		var keys: Array = cfg.get_value(\"binds\", action, [])
+		# Clear keyboard events and restore saved ones
+		for old in InputMap.action_get_events(action):
+			if old is InputEventKey:
+				InputMap.action_erase_event(action, old)
+		for keycode in keys:
+			var ev = InputEventKey.new()
+			ev.physical_keycode = keycode
+			InputMap.action_add_event(action, ev)
+"
+
+[node name="OptionsMenu" type="CanvasLayer" unique_id=100000001]
+process_mode = 3
+script = SubResource("GDScript_weus1")
+
+[node name="Control" type="Control" parent="." unique_id=100000002]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Control" unique_id=100000003]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 100.0
+offset_right = 900.0
+offset_bottom = 580.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Panel" unique_id=100000004]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/MarginContainer" unique_id=100000005]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="Control/Panel/MarginContainer/VBoxContainer" unique_id=100000006]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Key Bindings"
+
+[node name="Rows" type="VBoxContainer" parent="Control/Panel/MarginContainer/VBoxContainer" unique_id=100000007]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StatusLabel" type="Label" parent="Control/Panel/MarginContainer/VBoxContainer" unique_id=100000008]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+
+[node name="CloseButton" type="Button" parent="Control/Panel/MarginContainer/VBoxContainer" unique_id=100000009]
+layout_mode = 2
+text = "Close"
+
+[connection signal="pressed" from="Control/Panel/MarginContainer/VBoxContainer/CloseButton" to="." method="close"]

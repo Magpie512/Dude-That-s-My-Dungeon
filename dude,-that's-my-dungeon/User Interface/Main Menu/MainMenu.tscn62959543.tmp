@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cgdt0oj8fnfg6"]
+
+[ext_resource type="Script" uid="uid://bcbnf8tx8d28t" path="res://User Interface/Main Menu/MainMenu.gd" id="1_euprx"]
+[ext_resource type="Script" uid="uid://dkp7cg0facv05" path="res://User Interface/Main Menu/ShowDebug.gd" id="1_hj3i8"]
+[ext_resource type="FontFile" uid="uid://bouqi1jv0yljh" path="res://Assets/Fonts/EagleLake-Regular.ttf" id="2_4qsi2"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1205112906]
+
+[node name="Main Menu" type="Control" parent="." unique_id=1236985891]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_euprx")
+
+[node name="ColorRect" type="ColorRect" parent="Main Menu" unique_id=1890763680]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3071659, 0.62062883, 0.37798938, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Main Menu/ColorRect" unique_id=1935708879]
+layout_mode = 0
+offset_left = 78.6
+offset_top = 179.12
+offset_right = 310.60016
+offset_bottom = 490.12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/ColorRect/CenterContainer" unique_id=384295571]
+layout_mode = 2
+
+[node name="Create" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=638525768]
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("2_4qsi2")
+theme_override_font_sizes/font_size = 31
+text = "Create Game"
+
+[node name="Join" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=75005512]
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("2_4qsi2")
+theme_override_font_sizes/font_size = 31
+text = "Join Game"
+
+[node name="Customize" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=746695874]
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("2_4qsi2")
+theme_override_font_sizes/font_size = 31
+text = "Customize"
+
+[node name="Options" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=731586342]
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("2_4qsi2")
+theme_override_font_sizes/font_size = 31
+text = "Options"
+
+[node name="Quit" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=33301189]
+layout_mode = 2
+focus_mode = 1
+theme_override_fonts/font = ExtResource("2_4qsi2")
+theme_override_font_sizes/font_size = 31
+text = "Quit"
+
+[node name="Title" type="Label" parent="Main Menu/ColorRect" unique_id=1628706687]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 14.0
+offset_right = 931.0
+offset_bottom = 115.0
+theme_override_fonts/font = ExtResource("2_4qsi2")
+theme_override_font_sizes/font_size = 61
+text = "Dude, That's My Dungeon!"
+
+[node name="debug" type="Button" parent="Main Menu" unique_id=761815756]
+layout_mode = 0
+offset_left = 1050.0001
+offset_top = 20.999985
+offset_right = 1130.0001
+offset_bottom = 58.999985
+rotation = 0.17453292
+focus_mode = 1
+theme_override_font_sizes/font_size = 21
+text = "DEBUG"
+script = ExtResource("1_hj3i8")
+
+[connection signal="pressed" from="Main Menu/ColorRect/CenterContainer/VBoxContainer/Options" to="Main Menu" method="_on_options_pressed"]
+[connection signal="pressed" from="Main Menu/ColorRect/CenterContainer/VBoxContainer/Quit" to="Main Menu" method="_on_quit_pressed"]
