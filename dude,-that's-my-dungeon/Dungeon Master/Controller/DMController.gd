@@ -11,6 +11,7 @@ extends Node3D
 @export var max_fov: float = 90.0
 
 @onready var camera: Camera3D = $Camera3D
+@onready var player_menu = $PlayerMenu  # ← add this
 
 var _velocity: Vector3 = Vector3.ZERO
 var _target_fov: float = 75.0
@@ -22,45 +23,34 @@ func _ready():
 		_target_fov = camera.fov
 
 func _process(delta: float):
+	if player_menu.visible:  # ← guard
+		return
 	handle_movement(delta)
 	handle_zoom(delta)
 
 func handle_movement(delta: float):
-	# Get horizontal input (WASD / Joysticks)
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	
-	# Create a base direction vector
 	var move_vec = Vector3(input_dir.x, 0, input_dir.y)
-	
-	# Add vertical movement while the "jump" action is held
 	if Input.is_action_pressed("jump"):
 		move_vec.y += 1.0
-	
-	# Optional: Add downward movement if you have a "crouch" action
 	if Input.is_action_pressed("crouch"):
 		move_vec.y -= 1.0
-	
-	# Transform the direction based on where the camera is looking
 	var direction = (camera.global_transform.basis * move_vec).normalized()
-	
 	if direction:
 		_velocity = _velocity.lerp(direction * move_speed, acceleration * delta)
 	else:
-		# Smoothly stop when no keys are pressed
 		_velocity = _velocity.lerp(Vector3.ZERO, acceleration * delta)
-	
 	global_position += _velocity * delta
 
 func _input(event):
-	# Mouse look logic
+	if player_menu.visible:  # ← guard
+		return
 	if event is InputEventMouseMotion:
 		_yaw -= event.relative.x * look_sensitivity
 		_pitch -= event.relative.y * look_sensitivity
 		_pitch = clamp(_pitch, -89.9, 89.9)
 		rotation_degrees.y = _yaw
 		camera.rotation_degrees.x = _pitch
-
-	# FOV Zoom logic
 	if event.is_action_pressed("scroll_up"):
 		_target_fov = clamp(_target_fov - zoom_speed, min_fov, max_fov)
 	if event.is_action_pressed("scroll_down"):
