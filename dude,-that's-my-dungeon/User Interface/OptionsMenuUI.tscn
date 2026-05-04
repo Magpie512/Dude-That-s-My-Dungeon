@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://bwxpbh57uwvcj"]
+
+[sub_resource type="GDScript" id="GDScript_c0qpt"]
+script/source = "extends Control
+
+func _on_resolution_selected(index):
+	var size = Vector2i(1920, 1080) # Example: Get this from your OptionButton items
+	DisplayServer.window_set_size(size)
+
+func _on_audio_slider_value_changed(value: float, bus_name: String):
+	var bus_index = AudioServer.get_bus_index(bus_name)
+	# Convert linear slider (0-1) to Decibels
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+"
+
+[node name="OptionsMenuUi" type="Control" unique_id=480889711]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_c0qpt")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1211234629]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.60933006, 0.6093301, 0.60933006, 0.40392157)
+
+[node name="TabContainer" type="TabContainer" parent="ColorRect" unique_id=1144491174]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 88.0
+offset_right = 1024.0
+offset_bottom = 512.0
+theme_override_constants/tab_separation = 7
+theme_override_constants/outline_size = 5
+current_tab = 1
+
+[node name="Controls" type="TabBar" parent="ColorRect/TabContainer" unique_id=1515243140]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Video" type="TabBar" parent="ColorRect/TabContainer" unique_id=1723640297]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Video" unique_id=2014883965]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 21.0
+offset_right = 308.0
+offset_bottom = 261.0
+
+[node name="Resolution" type="RichTextLabel" parent="ColorRect/TabContainer/Video/VBoxContainer" unique_id=1198833463]
+layout_mode = 2
+text = "Resolution:"
+fit_content = true
+
+[node name="OptionButton2" type="OptionButton" parent="ColorRect/TabContainer/Video/VBoxContainer" unique_id=1688870503]
+layout_mode = 2
+selected = 1
+allow_reselect = true
+item_count = 2
+popup/item_0/text = "SD:800x600"
+popup/item_0/id = 1
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
+
+[node name="VSync" type="RichTextLabel" parent="ColorRect/TabContainer/Video/VBoxContainer" unique_id=1465533609]
+layout_mode = 2
+text = "V-Sync
+"
+fit_content = true
+
+[node name="OptionButton3" type="OptionButton" parent="ColorRect/TabContainer/Video/VBoxContainer" unique_id=647549078]
+layout_mode = 2
+selected = 3
+item_count = 4
+popup/item_0/text = "MSAA"
+popup/item_0/id = 1
+popup/item_1/text = "FXAA"
+popup/item_1/id = 2
+popup/item_2/text = "TAA"
+popup/item_2/id = 3
+popup/item_3/text = "None"
+popup/item_3/id = 0
+
+[node name="FPS" type="RichTextLabel" parent="ColorRect/TabContainer/Video/VBoxContainer" unique_id=1205474845]
+layout_mode = 2
+text = "FPS
+"
+fit_content = true
+
+[node name="OptionButton4" type="OptionButton" parent="ColorRect/TabContainer/Video/VBoxContainer" unique_id=1192794799]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "30FPS"
+popup/item_0/id = 0
+popup/item_1/text = "60FPS"
+popup/item_1/id = 1
+popup/item_2/text = "Uncapped"
+popup/item_2/id = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/TabContainer/Video" unique_id=245120844]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 21.0
+offset_right = 592.0
+offset_bottom = 261.0
+
+[node name="Window" type="RichTextLabel" parent="ColorRect/TabContainer/Video/VBoxContainer2" unique_id=1818195345]
+layout_mode = 2
+text = "Window Mode
+"
+fit_content = true
+
+[node name="OptionButton" type="OptionButton" parent="ColorRect/TabContainer/Video/VBoxContainer2" unique_id=991273087]
+layout_mode = 2
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Full Screen"
+popup/item_1/id = 1
+popup/item_2/text = "Borderless"
+popup/item_2/id = 2
+
+[node name="Sound" type="TabBar" parent="ColorRect/TabContainer" unique_id=699184097]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
