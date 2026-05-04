@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bll4ggw6rtpc5" path="res://Players/Base/PlayerBase.tscn" id="2_rnaqa"]
 [ext_resource type="PackedScene" uid="uid://bp2vic5w4tj3c" path="res://Environment/Tiles/debugTile.tscn" id="3_x2aov"]
 [ext_resource type="PackedScene" uid="uid://ix1db3macgbb" path="res://Dungeon Master/Controller/DMController.tscn" id="4_ul7d4"]
+[ext_resource type="PackedScene" uid="uid://ch8e004jasdqo" path="res://Environment/Props/DungeonMasterVisual.tscn" id="5_rnaqa"]
 
 [node name="Playmat" type="Node3D" unique_id=1339946944]
 transform = Transform3D(1, 0, 0, 0, 0.9999347, -0.011431658, 0, 0.011431658, 0.9999347, 0, 0, 0)
@@ -19,4 +20,6 @@ shadow_enabled = true
 [node name="DebugTile" parent="." unique_id=388316119 instance=ExtResource("3_x2aov")]
 
 [node name="DMHead" parent="." unique_id=1844525406 instance=ExtResource("4_ul7d4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 46.26749, -38.69694)
+
+[node name="DungeonMasterVisual" parent="." unique_id=1456967465 instance=ExtResource("5_rnaqa")]
+transform = Transform3D(0.04958189, -0.0114175975, -0.9987048, -0.7789362, 0.6254272, -0.045821365, 0.6251403, 0.7801996, 0.022116276, 0, 111.149506, -123.33392)

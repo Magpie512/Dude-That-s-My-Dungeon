@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ch8e004jasdqo"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_thcu0"]
+
+[node name="DungeonMasterVisual" type="Node3D" unique_id=1456967465]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1927460120]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -0.0023694038, 0, 0)
+mesh = SubResource("SphereMesh_thcu0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=695398434]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 14.808, 6.025, 5.22)
+mesh = SubResource("SphereMesh_thcu0")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1979819677]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 14.808, 6.025, -6.785)
+mesh = SubResource("SphereMesh_thcu0")
