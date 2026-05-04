@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cgdt0oj8fnfg6"]
 
-[ext_resource type="Script" uid="uid://bcbnf8tx8d28t" path="res://User Interface/Main Menu/main_menu.gd" id="1_euprx"]
-[ext_resource type="Script" uid="uid://dkp7cg0facv05" path="res://User Interface/Main Menu/showdebug.gd" id="1_hj3i8"]
+[ext_resource type="Script" uid="uid://bcbnf8tx8d28t" path="res://User Interface/Main Menu/MainMenu.gd" id="1_euprx"]
+[ext_resource type="Script" uid="uid://dkp7cg0facv05" path="res://User Interface/Main Menu/ShowDebug.gd" id="1_hj3i8"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1205112906]
 
@@ -34,22 +34,27 @@ text = "Dude, That's My Dungeon!"
 
 [node name="Create" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=638525768]
 layout_mode = 2
+focus_mode = 1
 text = "Create Game"
 
 [node name="Join" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=75005512]
 layout_mode = 2
+focus_mode = 1
 text = "Join Game"
 
 [node name="Customize" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=746695874]
 layout_mode = 2
+focus_mode = 1
 text = "Customize"
 
 [node name="Options" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=731586342]
 layout_mode = 2
+focus_mode = 1
 text = "Options"
 
 [node name="Quit" type="Button" parent="Main Menu/ColorRect/CenterContainer/VBoxContainer" unique_id=33301189]
 layout_mode = 2
+focus_mode = 1
 text = "Quit"
 
 [node name="debug" type="Button" parent="Main Menu" unique_id=761815756]
@@ -58,6 +63,7 @@ offset_left = 1036.0
 offset_top = 53.0
 offset_right = 1099.0
 offset_bottom = 84.0
+focus_mode = 1
 text = "DEBUG"
 script = ExtResource("1_hj3i8")
 

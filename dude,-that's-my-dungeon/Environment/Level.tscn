@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://0r71803bitne"]
 
-[ext_resource type="PackedScene" uid="uid://bll4ggw6rtpc5" path="res://Players/Base/Player_Base.tscn" id="1_vnvs1"]
+[ext_resource type="PackedScene" uid="uid://bll4ggw6rtpc5" path="res://Players/Base/PlayerBase.tscn" id="1_vnvs1"]
 [ext_resource type="PackedScene" uid="uid://bp2vic5w4tj3c" path="res://Environment/Tiles/debugTile.tscn" id="2_pwdfv"]
 
 [sub_resource type="Environment" id="Environment_vnvs1"]

@@ -10,7 +10,7 @@ func _ready():
 		print("Error: Could not find debug area button!")
 
 func _on_debug_pressed():
-	get_tree().change_scene_to_file("res://Environment/Level.tscn")
+	get_tree().change_scene_to_file("res://User Interface/Debug Lobby/DebugChoice.tscn")
 
 func _on_quit_pressed():
 	get_tree().quit()

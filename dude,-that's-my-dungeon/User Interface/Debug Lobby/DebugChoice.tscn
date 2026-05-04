@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cgox57ns0sgwc"]
+
+[ext_resource type="Script" uid="uid://bfakc4w17d6rf" path="res://User Interface/Debug Lobby/DebugChoice.gd" id="1_x3n1j"]
+
+[node name="DebugChoice" type="CanvasLayer" unique_id=738098655]
+
+[node name="Control" type="Control" parent="." unique_id=230215528]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_x3n1j")
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=2068512404]
+layout_mode = 0
+offset_right = 1156.0
+offset_bottom = 661.0
+color = Color(0.36439458, 0.28483468, 0.5478898, 1)
+
+[node name="GM" type="Button" parent="Control" unique_id=50913052]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 242.0
+offset_right = 263.0
+offset_bottom = 342.0
+focus_mode = 1
+text = "Game Master"
+
+[node name="Play" type="Button" parent="Control" unique_id=1047879698]
+layout_mode = 0
+offset_left = 853.0
+offset_top = 256.0
+offset_right = 1003.0
+offset_bottom = 356.0
+focus_mode = 1
+text = "Player"
+
+[connection signal="pressed" from="Control/Play" to="Control" method="_on_play_pressed"]

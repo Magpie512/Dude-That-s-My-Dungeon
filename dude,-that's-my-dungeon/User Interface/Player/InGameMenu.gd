@@ -13,7 +13,7 @@ func toggle_menu():
 	if visible:
 		# Show the mouse so they can click 'Invite' or 'Options'
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		$Control/PanelContainer/VBoxContainer/InviteButton.grab_focus()
+		$Control/CenterContainer/VBoxContainer/Invite.grab_focus()
 	else:
 		# Hide the mouse again so they can play
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -25,4 +25,4 @@ func _on_invite_button_pressed():
 func _on_quit_button_pressed():
 	# Crucial: Reset mouse before leaving or the Main Menu will be broken
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file("res://User Interface/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://User Interface/Main Menu/MainMenu.tscn")

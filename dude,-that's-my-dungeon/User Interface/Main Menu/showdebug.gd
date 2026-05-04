@@ -24,4 +24,3 @@ func _input(event):
 func _activate_button():
 	show()
 	grab_focus()
-	print("Debug button revealed!")
