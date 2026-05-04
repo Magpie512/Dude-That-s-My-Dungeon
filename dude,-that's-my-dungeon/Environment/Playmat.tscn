@@ -10,7 +10,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9999347, -0.011431658, 0, 0.011431658, 0.9
 script = ExtResource("1_wasts")
 
 [node name="PlayerBase" parent="." unique_id=1980618541 instance=ExtResource("2_rnaqa")]
-transform = Transform3D(1, 0, 0, 0, 0.9999347, 0.011431658, 0, -0.011431658, 0.9999347, -0.46391678, 1.0556493, 0.35487127)
+transform = Transform3D(1, 0, 0, 0, 0.9999347, 0.011431658, 0, -0.011431658, 0.9999347, -0.46391678, 0.7423606, 0.35845295)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=839444581]
 transform = Transform3D(1, 0, 0, 0, 0.6769145, 0.7360617, 0, -0.7360617, 0.6769145, 0, 4.5765395, 3.9441576)
@@ -19,4 +19,4 @@ shadow_enabled = true
 [node name="DebugTile" parent="." unique_id=388316119 instance=ExtResource("3_x2aov")]
 
 [node name="DMHead" parent="." unique_id=1844525406 instance=ExtResource("4_ul7d4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 46.267487, -38.696945)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 46.26749, -38.69694)
